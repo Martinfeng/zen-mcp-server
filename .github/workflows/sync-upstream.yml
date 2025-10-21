@@ -1,0 +1,146 @@
+name: Sync Upstream
+
+on:
+  schedule:
+    # 每天 UTC 00:00 运行（北京时间 08:00）
+    - cron: '0 0 * * *'
+  workflow_dispatch:  # 支持手动触发
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "Martin"
+          git config user.email "martinfeng1314@gmail.com"
+
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/BeehiveInnovations/zen-mcp-server.git || true
+          git fetch upstream
+
+      - name: Check for updates
+        id: check
+        run: |
+          COMMITS=$(git rev-list HEAD..upstream/main --count 2>/dev/null || echo "0")
+          echo "commits=$COMMITS" >> $GITHUB_OUTPUT
+          echo "Found $COMMITS new commit(s) from upstream"
+
+      - name: Show upstream changes
+        if: steps.check.outputs.commits > 0
+        run: |
+          echo "Recent upstream commits:"
+          git log HEAD..upstream/main --oneline --max-count=10
+
+      - name: Attempt automatic sync
+        if: steps.check.outputs.commits > 0
+        id: sync
+        run: |
+          chmod +x sync-upstream.sh
+          set +e
+          echo "y" | ./sync-upstream.sh
+          SYNC_EXIT_CODE=$?
+          set -e
+
+          if [ $SYNC_EXIT_CODE -eq 0 ]; then
+            echo "sync_success=true" >> $GITHUB_OUTPUT
+            echo "Sync completed successfully"
+          else
+            echo "sync_success=false" >> $GITHUB_OUTPUT
+            echo "Sync failed - conflicts detected"
+          fi
+
+      - name: Push changes
+        if: steps.check.outputs.commits > 0 && steps.sync.outputs.sync_success == 'true'
+        run: |
+          git push origin main
+          echo "Changes pushed to origin/main"
+
+      - name: Create issue on conflict
+        if: steps.check.outputs.commits > 0 && steps.sync.outputs.sync_success == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const commits = '${{ steps.check.outputs.commits }}';
+
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'upstream-sync-conflict'
+            });
+
+            if (issues.length > 0) {
+              console.log('Conflict issue already exists');
+              return;
+            }
+
+            const now = new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🚨 上游同步失败 - 需要手动解决冲突',
+              labels: ['upstream-sync-conflict', 'automated'],
+              body: `## 上游同步遇到冲突
+
+            **检测到的问题：**
+            - 📦 上游有 ${commits} 个新提交
+            - ⚠️ 自动合并失败，存在冲突
+            - 📅 检测时间：${now}
+
+            **需要手动操作：**
+
+            1. 在本地运行同步脚本：
+               \`\`\`bash
+               cd /path/to/zen-mcp-server
+               ./sync-upstream.sh
+               \`\`\`
+
+            2. 根据脚本提示解决冲突
+
+            3. 常见冲突文件及解决方案：
+               - **server.py**: 保留上游更改，重新添加 martin_patches import
+               - **pyproject.toml**: 保留上游版本号，手动改回包名为 martin-mcp-server
+               - **.env.example**: 保留上游更改，重新添加自定义 Base URL 说明
+
+            4. 解决后推送：
+               \`\`\`bash
+               git push origin main
+               \`\`\`
+
+            5. 关闭此 Issue
+
+            **详细文档：**
+            参见 [FORK_INFO.md](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/FORK_INFO.md) 中的冲突解决策略。
+
+            ---
+            *此 Issue 由 GitHub Actions 自动创建*`
+            });
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "  上游同步任务完成"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          echo "📊 任务统计："
+          echo "  - 上游新提交: ${{ steps.check.outputs.commits }}"
+          if [ "${{ steps.sync.outputs.sync_success }}" = "true" ]; then
+            echo "  - 同步状态: ✅ 成功"
+          else
+            echo "  - 同步状态: ⚠️ 需要手动处理"
+          fi
+          echo ""
