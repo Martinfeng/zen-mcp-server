@@ -52,9 +52,20 @@ def _patch_provider_base_urls():
     - XAI_BASE_URL: Custom XAI API endpoint
     - DIAL_BASE_URL: Custom DIAL API endpoint (takes precedence over DIAL_API_HOST)
     """
-    from providers.registry import ModelProviderRegistry
-    from providers.shared import ProviderType
-    from utils.env import get_env
+    # Lazy import to avoid circular dependencies and early initialization issues
+    import importlib
+
+    try:
+        registry_module = importlib.import_module('providers.registry')
+        shared_module = importlib.import_module('providers.shared')
+        env_module = importlib.import_module('utils.env')
+
+        ModelProviderRegistry = registry_module.ModelProviderRegistry
+        ProviderType = shared_module.ProviderType
+        get_env = env_module.get_env
+    except Exception as e:
+        logger.error(f"Failed to import required modules for patches: {e}")
+        return
 
     # Store original method
     original_get_provider = ModelProviderRegistry.get_provider.__func__
