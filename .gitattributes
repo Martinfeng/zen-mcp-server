@@ -1,27 +1,16 @@
-# Ensure shell scripts always have LF line endings on checkout
-*.sh text eol=lf
-*.bash text eol=lf
+# Git attributes for Martin's fork
+# These settings help with upstream merges
 
-# Python files
-*.py text eol=lf
+# Custom files - always keep ours during merge conflicts
+NOTICE merge=ours
+FORK_INFO.md merge=ours
+MARTIN_CUSTOM_FEATURES.md merge=ours
+martin_patches.py merge=ours
 
-# Shell script without extension
-run-server text eol=lf
-code_quality_checks text eol=lf
-run_integration_tests text eol=lf
-
-# General text files
-*.md text
-*.txt text
-*.yml text
-*.yaml text
-*.json text
-*.xml text
-
-# Binary files
-*.png binary
-*.jpg binary
-*.jpeg binary
-*.gif binary
-*.ico binary
-*.pdf binary
+# Modified files - need manual review during conflicts
+# (using default merge strategy to detect conflicts)
+server.py merge=diff3
+pyproject.toml merge=diff3
+.env.example merge=diff3
+run-server.sh merge=diff3
+run-server.ps1 merge=diff3

@@ -1,0 +1,37 @@
+Zen MCP Server
+Copyright 2025 Beehive Innovations
+https://github.com/BeehiveInnovations/zen-mcp-server
+
+This is a derivative work of Zen MCP Server, redistributed under the Apache License 2.0.
+
+PACKAGE NAME MODIFICATION:
+  The Python package name has been changed from "zen-mcp-server" to "martin-mcp-server"
+  solely to avoid package name conflicts when installing alongside the original package.
+
+  This is a technical fork for personal use, not a replacement or competing project.
+  All credit for the original work goes to Fahad Gilani and Beehive Innovations.
+
+MODIFICATIONS:
+  - Python package name: "zen-mcp-server" → "martin-mcp-server" (pyproject.toml)
+  - Virtual environment name: ".zen_venv" → ".martin_venv" (for local isolation)
+  - Minor customizations may be added for personal workflow requirements
+
+  All other branding, documentation, and functionality remain as per the original project.
+
+  For a complete list of changes, see the git commit history.
+
+Third-Party Components:
+  This software includes dependencies listed in requirements.txt and pyproject.toml,
+  each with their own license terms. Please refer to their respective licenses.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

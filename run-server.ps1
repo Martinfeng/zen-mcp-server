@@ -106,7 +106,7 @@ $ErrorActionPreference = "Stop"
 # Constants and Configuration  
 # ----------------------------------------------------------------------------
 
-$script:VENV_PATH = ".zen_venv"
+$script:VENV_PATH = ".martin_venv"
 $script:DOCKER_CLEANED_FLAG = ".docker_cleaned"
 $script:DESKTOP_CONFIG_FLAG = ".desktop_configured"
 $script:LOG_DIR = "logs"
@@ -1191,9 +1191,11 @@ function Get-ExistingMcpConfigType {
         elseif ($zenConfig.command -and $zenConfig.command.EndsWith("python.exe")) {
             $pythonType = "Python"
             $details = "Python virtual environment"
-            
-            if ($zenConfig.command.Contains(".zen_venv")) {
-                $details = "Python (zen virtual environment)"
+
+            if ($zenConfig.command.Contains(".martin_venv")) {
+                $details = "Python (martin virtual environment)"
+            } elseif ($zenConfig.command.Contains(".zen_venv")) {
+                $details = "Python (legacy zen virtual environment)"
             }
             elseif ($zenConfig.command.Contains("venv")) {
                 $details = "Python (virtual environment)"
@@ -1535,7 +1537,9 @@ function Test-GeminiCliIntegration {
         @"
 @echo off
 cd /d "%~dp0"
-if exist ".zen_venv\Scripts\python.exe" (
+if exist ".martin_venv\Scripts\python.exe" (
+    .martin_venv\Scripts\python.exe server.py %*
+) else if exist ".zen_venv\Scripts\python.exe" (
     .zen_venv\Scripts\python.exe server.py %*
 ) else (
     python server.py %*

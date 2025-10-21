@@ -18,6 +18,12 @@ The server runs on stdio (standard input/output) and communicates using JSON-RPC
 as defined by the MCP protocol.
 """
 
+# Apply Martin's custom patches (must be first, before any provider imports)
+try:
+    import martin_patches  # noqa: F401
+except ImportError:
+    pass  # Patches not available, continue with default behavior
+
 import asyncio
 import atexit
 import logging
