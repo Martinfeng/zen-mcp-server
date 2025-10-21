@@ -2,6 +2,19 @@
 
 <!-- version list -->
 
+## v1.0.1 (2025-10-21)
+
+### Bug Fixes
+
+- Use lazy import to avoid early dependency issues
+  ([`bc4cc7e`](https://github.com/Martinfeng/zen-mcp-server/commit/bc4cc7e2190cf6dc5b548c45b3ba2bbab76c2c91))
+
+### Chores
+
+- Sync version to config.py [skip ci]
+  ([`fbaab59`](https://github.com/Martinfeng/zen-mcp-server/commit/fbaab592e62c36b9588bfc69a7766d38dcc70860))
+
+
 ## v1.0.0 (2025-10-21)
 
 - Initial Release
