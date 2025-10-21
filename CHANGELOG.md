@@ -2,6 +2,19 @@
 
 <!-- version list -->
 
+## v1.0.3 (2025-10-21)
+
+### Bug Fixes
+
+- Include martin_patches.py in package build
+  ([`29ebe33`](https://github.com/Martinfeng/zen-mcp-server/commit/29ebe3339db68006e96835ddb66d26e58c5aa0f5))
+
+### Chores
+
+- Sync version to config.py [skip ci]
+  ([`004fc6a`](https://github.com/Martinfeng/zen-mcp-server/commit/004fc6aa0b38b542fd1f8a23af8e0f4b111a9c1f))
+
+
 ## v1.0.2 (2025-10-21)
 
 ### Bug Fixes
