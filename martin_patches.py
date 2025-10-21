@@ -103,7 +103,8 @@ def _patch_provider_base_urls():
 
             # Initialize with custom base_url if provided
             if custom_base_url:
-                logger.debug(f"🌐 Using custom {provider_type.value} endpoint: {custom_base_url}")
+                # Use WARNING level to ensure visibility even without DEBUG
+                logger.warning(f"🌐 CUSTOM BASE URL ACTIVE: {provider_type.value} -> {custom_base_url}")
                 provider = provider_class(api_key=api_key, base_url=custom_base_url)
             else:
                 provider = provider_class(api_key=api_key)
