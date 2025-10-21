@@ -37,10 +37,14 @@ def apply_patches():
     logger.info("🔧 Applying Martin's custom patches...")
 
     # Apply unified patch for all providers
-    _patch_provider_base_urls()
+    success = _patch_provider_base_urls()
 
-    _PATCHES_APPLIED = True
-    logger.info("✅ Martin's custom patches applied successfully")
+    if success:
+        _PATCHES_APPLIED = True
+        logger.info("✅ Martin's custom patches applied successfully")
+    else:
+        logger.error("❌ Failed to apply Martin's custom patches")
+        logger.error("   Custom base URL support will NOT be available")
 
 
 def _patch_provider_base_urls():
@@ -51,6 +55,9 @@ def _patch_provider_base_urls():
     - OPENAI_BASE_URL: Custom OpenAI API endpoint
     - XAI_BASE_URL: Custom XAI API endpoint
     - DIAL_BASE_URL: Custom DIAL API endpoint (takes precedence over DIAL_API_HOST)
+
+    Returns:
+        bool: True if patch was successfully applied, False otherwise
     """
     # Lazy import to avoid circular dependencies and early initialization issues
     import importlib
@@ -65,7 +72,7 @@ def _patch_provider_base_urls():
         get_env = env_module.get_env
     except Exception as e:
         logger.error(f"Failed to import required modules for patches: {e}")
-        return
+        return False
 
     # Store original method
     original_get_provider = ModelProviderRegistry.get_provider.__func__
@@ -132,6 +139,7 @@ def _patch_provider_base_urls():
     ModelProviderRegistry.get_provider = patched_get_provider
     logger.debug("✓ Patched ModelProviderRegistry.get_provider to support custom base URLs")
     logger.debug("  Supported: OPENAI_BASE_URL, XAI_BASE_URL, DIAL_BASE_URL")
+    return True
 
 
 # Auto-apply patches on import
