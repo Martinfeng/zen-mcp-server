@@ -2,6 +2,19 @@
 
 <!-- version list -->
 
+## v1.0.2 (2025-10-21)
+
+### Bug Fixes
+
+- Properly track patch application status
+  ([`f7f3879`](https://github.com/Martinfeng/zen-mcp-server/commit/f7f38791fcc6f84b902000e27069df0be7def5eb))
+
+### Chores
+
+- Sync version to config.py [skip ci]
+  ([`160fc7e`](https://github.com/Martinfeng/zen-mcp-server/commit/160fc7e835b9f9d57685c61bf1b8c466f78e2fe0))
+
+
 ## v1.0.1 (2025-10-21)
 
 ### Bug Fixes
