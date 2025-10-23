@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.0.4 (2025-10-23)
+
+### Bug Fixes
+
+- Replace Issue creation with workflow failure notification
+  ([`8e929b3`](https://github.com/Martinfeng/zen-mcp-server/commit/8e929b3dd05e772b1fadaa3a27ba07692d03f645))
+
+
 ## v1.0.3 (2025-10-21)
 
 ### Bug Fixes
