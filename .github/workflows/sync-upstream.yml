@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: write
-  issues: write
 
 jobs:
   sync:
@@ -67,67 +66,43 @@ jobs:
           git push origin main
           echo "Changes pushed to origin/main"
 
-      - name: Create issue on conflict
+      - name: Log conflict details
         if: steps.check.outputs.commits > 0 && steps.sync.outputs.sync_success == 'false'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const commits = '${{ steps.check.outputs.commits }}';
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "🚨 上游同步失败 - 需要手动解决冲突"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          echo "检测到的问题："
+          echo "  - 📦 上游有 ${{ steps.check.outputs.commits }} 个新提交"
+          echo "  - ⚠️ 自动合并失败，存在冲突"
+          echo "  - 📅 检测时间：$(TZ='Asia/Shanghai' date '+%Y/%m/%d %H:%M:%S')"
+          echo ""
+          echo "需要手动操作："
+          echo ""
+          echo "1. 在本地运行同步脚本："
+          echo "   cd /path/to/zen-mcp-server"
+          echo "   ./sync-upstream.sh"
+          echo ""
+          echo "2. 根据脚本提示解决冲突"
+          echo ""
+          echo "3. 常见冲突文件及解决方案："
+          echo "   - server.py: 保留上游更改，重新添加 martin_patches import"
+          echo "   - pyproject.toml: 保留上游版本号，手动改回包名为 martin-mcp-server"
+          echo "   - .env.example: 保留上游更改，重新添加自定义 Base URL 说明"
+          echo ""
+          echo "4. 解决后推送："
+          echo "   git push origin main"
+          echo ""
+          echo "详细文档："
+          echo "  https://github.com/${{ github.repository }}/blob/main/FORK_INFO.md"
+          echo ""
 
-            const { data: issues } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: 'open',
-              labels: 'upstream-sync-conflict'
-            });
-
-            if (issues.length > 0) {
-              console.log('Conflict issue already exists');
-              return;
-            }
-
-            const now = new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
-
-            await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: '🚨 上游同步失败 - 需要手动解决冲突',
-              labels: ['upstream-sync-conflict', 'automated'],
-              body: `## 上游同步遇到冲突
-
-            **检测到的问题：**
-            - 📦 上游有 ${commits} 个新提交
-            - ⚠️ 自动合并失败，存在冲突
-            - 📅 检测时间：${now}
-
-            **需要手动操作：**
-
-            1. 在本地运行同步脚本：
-               \`\`\`bash
-               cd /path/to/zen-mcp-server
-               ./sync-upstream.sh
-               \`\`\`
-
-            2. 根据脚本提示解决冲突
-
-            3. 常见冲突文件及解决方案：
-               - **server.py**: 保留上游更改，重新添加 martin_patches import
-               - **pyproject.toml**: 保留上游版本号，手动改回包名为 martin-mcp-server
-               - **.env.example**: 保留上游更改，重新添加自定义 Base URL 说明
-
-            4. 解决后推送：
-               \`\`\`bash
-               git push origin main
-               \`\`\`
-
-            5. 关闭此 Issue
-
-            **详细文档：**
-            参见 [FORK_INFO.md](https://github.com/${context.repo.owner}/${context.repo.repo}/blob/main/FORK_INFO.md) 中的冲突解决策略。
-
-            ---
-            *此 Issue 由 GitHub Actions 自动创建*`
-            });
+      - name: Fail workflow on conflict
+        if: steps.check.outputs.commits > 0 && steps.sync.outputs.sync_success == 'false'
+        run: |
+          echo "::error title=上游同步失败::检测到 ${{ steps.check.outputs.commits }} 个上游提交无法自动合并，需要手动解决冲突。查看工作流日志获取详细信息。"
+          exit 1
 
       - name: Summary
         if: always()
