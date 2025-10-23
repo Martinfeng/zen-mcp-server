@@ -2,48 +2,29 @@
 
 <!-- version list -->
 
-## v1.0.3 (2025-10-21)
+## v9.1.3 (2025-10-22)
 
 ### Bug Fixes
 
-- Include martin_patches.py in package build
-  ([`29ebe33`](https://github.com/Martinfeng/zen-mcp-server/commit/29ebe3339db68006e96835ddb66d26e58c5aa0f5))
+- Reduced token usage, removed parameters from schema that CLIs never seem to use
+  ([`3e27319`](https://github.com/BeehiveInnovations/zen-mcp-server/commit/3e27319e60b0287df918856b58b2bbf042c948a8))
+
+- Telemetry option no longer available in gemini 0.11
+  ([`2a8dff0`](https://github.com/BeehiveInnovations/zen-mcp-server/commit/2a8dff0cc8a3f33111533cdb971d654637ed0578))
 
 ### Chores
 
 - Sync version to config.py [skip ci]
-  ([`004fc6a`](https://github.com/Martinfeng/zen-mcp-server/commit/004fc6aa0b38b542fd1f8a23af8e0f4b111a9c1f))
-
-
-## v1.0.2 (2025-10-21)
-
-### Bug Fixes
-
-- Properly track patch application status
-  ([`f7f3879`](https://github.com/Martinfeng/zen-mcp-server/commit/f7f38791fcc6f84b902000e27069df0be7def5eb))
-
-### Chores
+  ([`9e163f9`](https://github.com/BeehiveInnovations/zen-mcp-server/commit/9e163f9dc0654fc28961c9897b7c787a2b96e57d))
 
 - Sync version to config.py [skip ci]
-  ([`160fc7e`](https://github.com/Martinfeng/zen-mcp-server/commit/160fc7e835b9f9d57685c61bf1b8c466f78e2fe0))
+  ([`557e443`](https://github.com/BeehiveInnovations/zen-mcp-server/commit/557e443a63ffd733fb41faaa8696f6f4bb2c2fd1))
 
+### Refactoring
 
-## v1.0.1 (2025-10-21)
+- Improved precommit system prompt
+  ([`3efff60`](https://github.com/BeehiveInnovations/zen-mcp-server/commit/3efff6056e322ee1531d7bed5601038c129a8b29))
 
-### Bug Fixes
-
-- Use lazy import to avoid early dependency issues
-  ([`bc4cc7e`](https://github.com/Martinfeng/zen-mcp-server/commit/bc4cc7e2190cf6dc5b548c45b3ba2bbab76c2c91))
-
-### Chores
-
-- Sync version to config.py [skip ci]
-  ([`fbaab59`](https://github.com/Martinfeng/zen-mcp-server/commit/fbaab592e62c36b9588bfc69a7766d38dcc70860))
-
-
-## v1.0.0 (2025-10-21)
-
-- Initial Release
 
 ## v9.1.2 (2025-10-21)
 
