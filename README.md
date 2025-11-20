@@ -6,6 +6,8 @@
 [![Version](https://img.shields.io/badge/version-1.2.0-green.svg)](https://github.com/Martinfeng/zen-mcp-server)
 [![Upstream](https://img.shields.io/badge/upstream-v9.4.0-blue.svg)](https://github.com/BeehiveInnovations/zen-mcp-server)
 
+English | [简体中文](README_ZH.md)
+
 ## 📌 About This Fork
 
 This is a **technical fork** of the excellent [Zen MCP Server](https://github.com/BeehiveInnovations/zen-mcp-server) project, with the following key enhancements:
