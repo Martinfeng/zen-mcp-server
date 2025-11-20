@@ -1,7 +1,7 @@
 # Modified by Martin (Feng) on 2025-10-21. See NOTICE for details.
 [project]
 name = "martin-mcp-server"
-version = "1.0.5"
+version = "9.4.0"
 description = "AI-powered MCP server with multiple model providers"
 requires-python = ">=3.9"
 dependencies = [
@@ -19,7 +19,11 @@ include = ["tools*", "providers*", "systemprompts*", "utils*", "conf*", "clink*"
 py-modules = ["server", "config", "martin_patches"]
 
 [tool.setuptools.package-data]
-"*" = ["conf/*.json"]
+"*" = [
+    "conf/*.json",
+    "conf/cli_clients/*.json",
+    "systemprompts/clink/*.txt",
+]
 
 [tool.setuptools.data-files]
 "conf" = [

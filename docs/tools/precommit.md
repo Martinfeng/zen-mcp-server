@@ -59,7 +59,7 @@ to **Publish all Changes** was made after a rigorous set of prompts where it exa
 from different angles (performance, bugs, anti-patterns etc). After confirming that unit tests were 
 passing, it went ahead with an initial review with O3; came back clean - all good to go. O3 was happy, everything looked great.
 
-Then it shared the changes and relevant code with Gemini 2.5 Pro - the following is the outcome:
+Then it shared the changes and relevant code with Gemini 3.0 Pro - the following is the outcome:
 
 ```
 ⏺ zen:precommit (MCP)(step: "FINAL VALIDATION COMPLETE. All changes have been thoroughly analyzed and are ready for
@@ -85,7 +85,7 @@ Then it shared the changes and relevant code with Gemini 2.5 Pro - the following
 
 ⏺ 🔍 Pre-Commit Validation Complete
 
-  Based on comprehensive analysis using both O3 and Gemini 2.5 Pro models, I can provide the following assessment:
+  Based on comprehensive analysis using both O3 and Gemini 3.0 Pro models, I can provide the following assessment:
 
   ✅ APPROVED WITH CRITICAL FIX REQUIRED
 
@@ -140,7 +140,7 @@ Use zen and perform a thorough precommit ensuring there aren't any new regressio
 **Initial Configuration (used in step 1):**
 - `path`: Starting directory to search for repos (REQUIRED for step 1, must be absolute path)
 - `prompt`: The original user request description for the changes (required for context)
-- `model`: auto|pro|flash|flash-2.0|flashlite|o3|o3-mini|o4-mini|gpt4.1|gpt5|gpt5-mini|gpt5-nano (default: server default)
+- `model`: auto|pro|flash|flash-2.0|flashlite|o3|o3-mini|o4-mini|gpt4.1|gpt5.1|gpt5.1-codex|gpt5.1-codex-mini|gpt5|gpt5-mini|gpt5-nano (default: server default)
 - `compare_to`: Compare against a branch/tag instead of local changes (optional)
 - `severity_filter`: critical|high|medium|low|all (default: all)
 - `include_staged`: Include staged changes in the review (default: true)
