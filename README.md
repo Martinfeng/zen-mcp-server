@@ -3,7 +3,8 @@
 > A enhanced fork of [Zen MCP Server](https://github.com/BeehiveInnovations/zen-mcp-server) by Beehive Innovations
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-9.4.0-green.svg)](https://github.com/Martinfeng/zen-mcp-server)
+[![Version](https://img.shields.io/badge/version-1.2.0-green.svg)](https://github.com/Martinfeng/zen-mcp-server)
+[![Upstream](https://img.shields.io/badge/upstream-v9.4.0-blue.svg)](https://github.com/BeehiveInnovations/zen-mcp-server)
 
 ## 📌 About This Fork
 
