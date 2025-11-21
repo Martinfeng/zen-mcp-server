@@ -1,7 +1,7 @@
 # Modified by Martin (Feng) on 2025-10-21. See NOTICE for details.
 [project]
 name = "martin-mcp-server"
-version = "1.2.0"
+version = "9.4.1"
 description = "AI-powered MCP server with multiple model providers"
 requires-python = ">=3.9"
 dependencies = [
