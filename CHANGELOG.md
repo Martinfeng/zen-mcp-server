@@ -9,6 +9,33 @@
 - Regression https://github.com/BeehiveInnovations/zen-mcp-server/issues/338
   ([`aceddb6`](https://github.com/BeehiveInnovations/zen-mcp-server/commit/aceddb655fc36918108b3da1f926bdd4e94875a2))
 
+
+## v1.3.0 (2025-11-21)
+
+### Chores
+
+- Sync version to config.py [skip ci]
+  ([`3420d57`](https://github.com/Martinfeng/zen-mcp-server/commit/3420d576f251c08fc67bfbf5ae474d476e572cf9))
+
+### Documentation
+
+- Add Chinese README (README_ZH.md)
+  ([`e06942e`](https://github.com/Martinfeng/zen-mcp-server/commit/e06942ee62af187eb29e4fab3dc6715b5c1a6dd4))
+
+- Replace README with fork-specific documentation
+  ([`01a0908`](https://github.com/Martinfeng/zen-mcp-server/commit/01a090868d7e517a1bb121d323f816a85383ba31))
+
+- Update version badge to 1.2.0 and add upstream version
+  ([`33d92e4`](https://github.com/Martinfeng/zen-mcp-server/commit/33d92e4a34f3e0c0646ed9d6bb251b7f064cb5de))
+
+### Features
+
+- Add Gemini model validation bypass for custom endpoints
+  ([`abdb01e`](https://github.com/Martinfeng/zen-mcp-server/commit/abdb01e20b117c3266e876a11c68179abfd076f4))
+
+
+## v1.2.0 (2025-11-20)
+
 ### Chores
 
 - Sync version to config.py [skip ci]
