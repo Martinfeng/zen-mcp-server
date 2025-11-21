@@ -16,20 +16,27 @@ Usage:
         OPENAI_BASE_URL=https://your-proxy.com/v1
         XAI_BASE_URL=https://your-xai-proxy.com/v1
         DIAL_BASE_URL=https://your-dial-endpoint.com
+        GEMINI_BASE_URL=https://your-gemini-endpoint.com
 
     When a custom base URL is set, you can use ANY model name:
         - Local models: llama3.2, qwen2.5, mistral, etc.
         - Custom endpoints: your-custom-model-name
         - vLLM/Ollama: any model available on your endpoint
+        - Custom Gemini models: gemini-3.0-pro, gemini-custom, etc.
 
-    Example with Ollama:
+    Example with Ollama (OpenAI-compatible):
         OPENAI_BASE_URL=http://localhost:11434/v1
         OPENAI_API_KEY=dummy
         # Now can use: llama3.2, mistral, qwen2.5, etc.
 
+    Example with Custom Gemini endpoint:
+        GEMINI_BASE_URL=http://localhost:8088/v1
+        GEMINI_API_KEY=dummy
+        # Now can use: gemini-3.0-pro, gemini-custom, etc.
+
 Author: Martin (Feng)
 Date: 2025-10-21
-Updated: 2025-10-23 - Added model validation bypass
+Updated: 2025-11-21 - Added Gemini model validation bypass
 """
 
 import logging
@@ -167,15 +174,16 @@ def _patch_model_validation_bypass():
     """
     Bypass model validation when using custom base URLs.
 
-    When a custom base URL is configured (OPENAI_BASE_URL, XAI_BASE_URL, or DIAL_BASE_URL),
+    When a custom base URL is configured (OPENAI_BASE_URL, XAI_BASE_URL, DIAL_BASE_URL, or GEMINI_BASE_URL),
     allow any model name to be used without requiring it to be in the model registry.
     This enables using:
     - Local models (Ollama, vLLM)
     - Self-hosted OpenAI-compatible endpoints
-    - Custom model names not in conf/openai_models.json
+    - Custom Gemini-compatible endpoints
+    - Custom model names not in conf/openai_models.json or conf/gemini_models.json
 
     For unknown models, reasonable default capabilities are provided based on
-    typical OpenAI-compatible API behavior.
+    typical API behavior.
 
     Returns:
         bool: True if patch was successfully applied, False otherwise
@@ -198,6 +206,7 @@ def _patch_model_validation_bypass():
         ('providers.openai', 'OpenAIModelProvider', 'OPENAI_BASE_URL', ProviderType.OPENAI),
         ('providers.xai', 'XAIModelProvider', 'XAI_BASE_URL', ProviderType.XAI),
         ('providers.dial', 'DIALModelProvider', 'DIAL_BASE_URL', ProviderType.DIAL),
+        ('providers.gemini', 'GeminiModelProvider', 'GEMINI_BASE_URL', ProviderType.GOOGLE),
     ]
 
     patched_count = 0

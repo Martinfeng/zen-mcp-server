@@ -35,6 +35,7 @@ OPENAI_API_KEY=dummy
 # 其他提供商
 XAI_BASE_URL=https://your-xai-gateway.com/v1
 DIAL_BASE_URL=https://your-dial-endpoint.com
+GEMINI_BASE_URL=https://your-gemini-endpoint.com
 ```
 
 **使用场景：**
@@ -43,16 +44,22 @@ DIAL_BASE_URL=https://your-dial-endpoint.com
 - 🔒 API 代理和速率限制器
 - 🏠 本地模型服务器（Ollama、vLLM）
 - 🧪 开发/测试环境
+- 🔧 自定义 Gemini 兼容端点
 
 #### 2. 无限制模型名称 🔓
 
-使用自定义 Base URL 时，**允许使用任意模型名称** - 无需在 `conf/openai_models.json` 中注册：
+使用自定义 Base URL 时，**允许使用任意模型名称** - 无需在 `conf/openai_models.json` 或 `conf/gemini_models.json` 中注册：
 
 ```bash
 # 示例：使用 Ollama 和任意本地模型
 OPENAI_BASE_URL=http://localhost:11434/v1
 OPENAI_API_KEY=dummy
 DEFAULT_MODEL=llama3.2  # ✅ 直接可用！无需注册
+
+# 或使用自定义 Gemini 端点
+GEMINI_BASE_URL=http://localhost:8088/v1
+GEMINI_API_KEY=dummy
+DEFAULT_MODEL=gemini-3.0-pro  # ✅ 任意 Gemini 模型！
 
 # 或者 qwen、mistral、deepseek 等
 DEFAULT_MODEL=qwen2.5-coder
@@ -62,7 +69,7 @@ DEFAULT_MODEL=qwen2.5-coder
 - ✅ 立即使用本地模型
 - ✅ 测试自定义模型无需配置文件
 - ✅ 支持最新模型，无需等待官方注册
-- ✅ 兼容自托管的 OpenAI 兼容端点
+- ✅ 兼容自托管的 OpenAI/Gemini 兼容端点
 
 #### 3. 非侵入式实现 🎨
 

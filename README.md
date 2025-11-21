@@ -35,6 +35,7 @@ OPENAI_API_KEY=dummy
 # Other providers
 XAI_BASE_URL=https://your-xai-gateway.com/v1
 DIAL_BASE_URL=https://your-dial-endpoint.com
+GEMINI_BASE_URL=https://your-gemini-endpoint.com
 ```
 
 **Use Cases:**
@@ -43,16 +44,22 @@ DIAL_BASE_URL=https://your-dial-endpoint.com
 - 🔒 API proxies and rate limiters
 - 🏠 Local model servers (Ollama, vLLM)
 - 🧪 Development/testing environments
+- 🔧 Custom Gemini-compatible endpoints
 
 #### 2. Unrestricted Model Names 🔓
 
-When using custom base URLs, **any model name is allowed** - no need to register in `conf/openai_models.json`:
+When using custom base URLs, **any model name is allowed** - no need to register in `conf/openai_models.json` or `conf/gemini_models.json`:
 
 ```bash
 # Example: Use Ollama with any local model
 OPENAI_BASE_URL=http://localhost:11434/v1
 OPENAI_API_KEY=dummy
 DEFAULT_MODEL=llama3.2  # ✅ Works! No registry needed
+
+# Or use custom Gemini endpoint
+GEMINI_BASE_URL=http://localhost:8088/v1
+GEMINI_API_KEY=dummy
+DEFAULT_MODEL=gemini-3.0-pro  # ✅ Any Gemini model!
 
 # Or qwen, mistral, deepseek, etc.
 DEFAULT_MODEL=qwen2.5-coder
@@ -62,7 +69,7 @@ DEFAULT_MODEL=qwen2.5-coder
 - ✅ Use local models instantly
 - ✅ Test custom models without configuration files
 - ✅ Support bleeding-edge models before they're in the registry
-- ✅ Work with self-hosted OpenAI-compatible endpoints
+- ✅ Work with self-hosted OpenAI/Gemini-compatible endpoints
 
 #### 3. Non-Invasive Implementation 🎨
 
