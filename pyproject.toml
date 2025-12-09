@@ -1,7 +1,7 @@
 # Modified by Martin (Feng) on 2025-10-21. See NOTICE for details.
 [project]
 name = "martin-mcp-server"
-version = "1.3.1"
+version = "9.4.2"
 description = "AI-powered MCP server with multiple model providers"
 requires-python = ">=3.9"
 dependencies = [
@@ -54,6 +54,7 @@ extend-exclude = '''
   | \.venv
   | \.zen_venv
   | \.martin_venv
+  | \.pal_venv
   | venv
   | _build
   | buck-out
@@ -70,7 +71,7 @@ force_grid_wrap = 0
 use_parentheses = true
 ensure_newline_before_comments = true
 line_length = 120
-skip_glob = ["venv/*", ".venv/*", ".zen_venv/*"]
+skip_glob = ["venv/*", ".venv/*", ".pal_venv/*"]
 
 [tool.ruff]
 target-version = "py39"

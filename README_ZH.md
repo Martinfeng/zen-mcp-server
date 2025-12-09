@@ -1,16 +1,16 @@
 # Martin's Zen MCP Server Fork
 
-> [Zen MCP Server](https://github.com/BeehiveInnovations/zen-mcp-server) 的增强版 Fork - 由 Beehive Innovations 原创
+> [Zen MCP Server](https://github.com/BeehiveInnovations/pal-mcp-server) 的增强版 Fork - 由 Beehive Innovations 原创
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-1.2.0-green.svg)](https://github.com/Martinfeng/zen-mcp-server)
-[![Upstream](https://img.shields.io/badge/upstream-v9.4.0-blue.svg)](https://github.com/BeehiveInnovations/zen-mcp-server)
+[![Upstream](https://img.shields.io/badge/upstream-v9.4.0-blue.svg)](https://github.com/BeehiveInnovations/pal-mcp-server)
 
 [English](README.md) | 简体中文
 
 ## 📌 关于此 Fork
 
-这是优秀的 [Zen MCP Server](https://github.com/BeehiveInnovations/zen-mcp-server) 项目的**技术性 Fork**，包含以下核心增强：
+这是优秀的 [Zen MCP Server](https://github.com/BeehiveInnovations/pal-mcp-server) 项目的**技术性 Fork**，包含以下核心增强：
 
 ### 🎯 主要目的
 
@@ -96,7 +96,7 @@ DEFAULT_MODEL=qwen2.5-coder
 - 🖼️ **视觉支持** - 分析屏幕截图和图表
 - 🏠 **本地模型支持** - Llama、Mistral 等，保护隐私且零成本
 
-👉 **[查看上游文档](https://github.com/BeehiveInnovations/zen-mcp-server)** 了解完整功能详情、示例和视频。
+👉 **[查看上游文档](https://github.com/BeehiveInnovations/pal-mcp-server)** 了解完整功能详情、示例和视频。
 
 ---
 
@@ -196,10 +196,10 @@ git merge upstream/main
 - [NOTICE](NOTICE) - Apache 2.0 许可证声明和归属
 
 ### 上游文档（完整功能）
-- [入门指南](https://github.com/BeehiveInnovations/zen-mcp-server/blob/main/docs/getting-started.md)
-- [配置指南](https://github.com/BeehiveInnovations/zen-mcp-server/blob/main/docs/configuration.md)
-- [工具文档](https://github.com/BeehiveInnovations/zen-mcp-server/tree/main/docs/tools)
-- [高级用法](https://github.com/BeehiveInnovations/zen-mcp-server/blob/main/docs/advanced-usage.md)
+- [入门指南](https://github.com/BeehiveInnovations/pal-mcp-server/blob/main/docs/getting-started.md)
+- [配置指南](https://github.com/BeehiveInnovations/pal-mcp-server/blob/main/docs/configuration.md)
+- [工具文档](https://github.com/BeehiveInnovations/pal-mcp-server/tree/main/docs/tools)
+- [高级用法](https://github.com/BeehiveInnovations/pal-mcp-server/blob/main/docs/advanced-usage.md)
 
 ---
 
@@ -232,7 +232,7 @@ README_ZH.md          # 新增：中文文档
 
 ## 🤝 致谢
 
-**原始项目：** [Zen MCP Server](https://github.com/BeehiveInnovations/zen-mcp-server)
+**原始项目：** [Zen MCP Server](https://github.com/BeehiveInnovations/pal-mcp-server)
 **原作者：** Fahad Gilani @ [Beehive Innovations](https://github.com/BeehiveInnovations)
 **许可证：** Apache License 2.0
 
@@ -251,12 +251,12 @@ Apache License 2.0 - 详见 [LICENSE](LICENSE)
 ## 🔗 相关链接
 
 - **此 Fork：** https://github.com/Martinfeng/zen-mcp-server
-- **上游项目：** https://github.com/BeehiveInnovations/zen-mcp-server
+- **上游项目：** https://github.com/BeehiveInnovations/pal-mcp-server
 - **问题跟踪：** https://github.com/Martinfeng/zen-mcp-server/issues
-- **上游问题：** https://github.com/BeehiveInnovations/zen-mcp-server/issues
+- **上游问题：** https://github.com/BeehiveInnovations/pal-mcp-server/issues
 
 ---
 
 ## ⚠️ 免责声明
 
-这是一个**用于个人使用的技术性 fork**，不是竞争或替代项目。如需官方、全面支持的版本，请使用[上游 Zen MCP Server](https://github.com/BeehiveInnovations/zen-mcp-server)。
+这是一个**用于个人使用的技术性 fork**，不是竞争或替代项目。如需官方、全面支持的版本，请使用[上游 Zen MCP Server](https://github.com/BeehiveInnovations/pal-mcp-server)。

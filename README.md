@@ -1,16 +1,16 @@
-# Martin's Zen MCP Server Fork
+# Martin's PAL MCP Server Fork
 
-> A enhanced fork of [Zen MCP Server](https://github.com/BeehiveInnovations/zen-mcp-server) by Beehive Innovations
+> A enhanced fork of [PAL MCP Server](https://github.com/BeehiveInnovations/pal-mcp-server) (formerly Zen MCP Server) by Beehive Innovations
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.2.0-green.svg)](https://github.com/Martinfeng/zen-mcp-server)
-[![Upstream](https://img.shields.io/badge/upstream-v9.4.0-blue.svg)](https://github.com/BeehiveInnovations/zen-mcp-server)
+[![Version](https://img.shields.io/badge/version-9.4.2-green.svg)](https://github.com/Martinfeng/zen-mcp-server)
+[![Upstream](https://img.shields.io/badge/upstream-v9.4.2-blue.svg)](https://github.com/BeehiveInnovations/pal-mcp-server)
 
 English | [简体中文](README_ZH.md)
 
 ## 📌 About This Fork
 
-This is a **technical fork** of the excellent [Zen MCP Server](https://github.com/BeehiveInnovations/zen-mcp-server) project, with the following key enhancements:
+This is a **technical fork** of the excellent [PAL MCP Server](https://github.com/BeehiveInnovations/pal-mcp-server) (formerly Zen MCP Server) project, with the following key enhancements:
 
 ### 🎯 Main Purposes
 
@@ -96,7 +96,7 @@ All enhancements are implemented via `martin_patches.py` using monkey patching:
 - 🖼️ **Vision Support** - Analyze screenshots and diagrams
 - 🏠 **Local Model Support** - Llama, Mistral, etc. for privacy and zero cost
 
-👉 **[View upstream documentation](https://github.com/BeehiveInnovations/zen-mcp-server)** for full feature details, examples, and videos.
+👉 **[View upstream documentation](https://github.com/BeehiveInnovations/pal-mcp-server)** for full feature details, examples, and videos.
 
 ---
 
@@ -196,10 +196,10 @@ The sync script automatically:
 - [NOTICE](NOTICE) - Apache 2.0 license notice and attribution
 
 ### Upstream Docs (Full Features)
-- [Getting Started](https://github.com/BeehiveInnovations/zen-mcp-server/blob/main/docs/getting-started.md)
-- [Configuration Guide](https://github.com/BeehiveInnovations/zen-mcp-server/blob/main/docs/configuration.md)
-- [Tool Documentation](https://github.com/BeehiveInnovations/zen-mcp-server/tree/main/docs/tools)
-- [Advanced Usage](https://github.com/BeehiveInnovations/zen-mcp-server/blob/main/docs/advanced-usage.md)
+- [Getting Started](https://github.com/BeehiveInnovations/pal-mcp-server/blob/main/docs/getting-started.md)
+- [Configuration Guide](https://github.com/BeehiveInnovations/pal-mcp-server/blob/main/docs/configuration.md)
+- [Tool Documentation](https://github.com/BeehiveInnovations/pal-mcp-server/tree/main/docs/tools)
+- [Advanced Usage](https://github.com/BeehiveInnovations/pal-mcp-server/blob/main/docs/advanced-usage.md)
 
 ---
 
@@ -231,7 +231,7 @@ All other files remain synced with upstream.
 
 ## 🤝 Credits
 
-**Original Project:** [Zen MCP Server](https://github.com/BeehiveInnovations/zen-mcp-server)
+**Original Project:** [Zen MCP Server](https://github.com/BeehiveInnovations/pal-mcp-server)
 **Original Author:** Fahad Gilani @ [Beehive Innovations](https://github.com/BeehiveInnovations)
 **License:** Apache License 2.0
 
@@ -250,12 +250,12 @@ This project includes modifications to the original Zen MCP Server. See [NOTICE]
 ## 🔗 Links
 
 - **This Fork:** https://github.com/Martinfeng/zen-mcp-server
-- **Upstream Project:** https://github.com/BeehiveInnovations/zen-mcp-server
+- **Upstream Project:** https://github.com/BeehiveInnovations/pal-mcp-server
 - **Issue Tracker:** https://github.com/Martinfeng/zen-mcp-server/issues
-- **Upstream Issues:** https://github.com/BeehiveInnovations/zen-mcp-server/issues
+- **Upstream Issues:** https://github.com/BeehiveInnovations/pal-mcp-server/issues
 
 ---
 
 ## ⚠️ Disclaimer
 
-This is a **technical fork for personal use**, not a competing or replacement project. For the official, fully-supported version, please use the [upstream Zen MCP Server](https://github.com/BeehiveInnovations/zen-mcp-server).
+This is a **technical fork for personal use**, not a competing or replacement project. For the official, fully-supported version, please use the [upstream Zen MCP Server](https://github.com/BeehiveInnovations/pal-mcp-server).
