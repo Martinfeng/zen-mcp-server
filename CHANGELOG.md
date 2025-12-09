@@ -2,6 +2,39 @@
 
 <!-- version list -->
 
+## v1.3.2 (2025-12-09)
+
+### Bug Fixes
+
+- Rebranding, see [docs/name-change.md](docs/name-change.md) for details
+  ([`b2dc849`](https://github.com/Martinfeng/zen-mcp-server/commit/b2dc84992d70839b29b611178b3871f4922b747f))
+
+- Update test to use fork package name (martin-mcp-server)
+  ([`887af69`](https://github.com/Martinfeng/zen-mcp-server/commit/887af6954a445781144cf890570e638e0d3a2e2f))
+
+### Chores
+
+- Sync version to config.py [skip ci]
+  ([`5c3dd75`](https://github.com/Martinfeng/zen-mcp-server/commit/5c3dd75ca6b259f590bfd5078ea8e2f684e52de4))
+
+- Sync version to config.py [skip ci]
+  ([`605633b`](https://github.com/Martinfeng/zen-mcp-server/commit/605633b2a2b044bbc5e41f2994dde27409a5b9b4))
+
+- Sync version to config.py [skip ci]
+  ([`8db87e1`](https://github.com/Martinfeng/zen-mcp-server/commit/8db87e19baa4c1b09b79a2d435239333f0476781))
+
+### Documentation
+
+- Cleanup
+  ([`74f26e8`](https://github.com/Martinfeng/zen-mcp-server/commit/74f26e82e7a9c8a0214deef1cb18a3b2fa074050))
+
+- Cleanup
+  ([`2b22174`](https://github.com/Martinfeng/zen-mcp-server/commit/2b221746fee6f7749d8aed8d07a85e428ac8e00f))
+
+- Update subheading
+  ([`591287c`](https://github.com/Martinfeng/zen-mcp-server/commit/591287cb2f442a1fa34cd1139e3a0ad887388e5b))
+
+
 ## v9.4.2 (2025-12-04)
 
 ### Bug Fixes
