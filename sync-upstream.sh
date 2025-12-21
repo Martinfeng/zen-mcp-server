@@ -14,6 +14,19 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+# Detect OS for sed compatibility
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS requires empty string after -i
+    sed_inplace() {
+        sed -i '' "$@"
+    }
+else
+    # Linux doesn't need empty string
+    sed_inplace() {
+        sed -i "$@"
+    }
+fi
+
 echo -e "${BLUE}================================================${NC}"
 echo -e "${BLUE}  Zen MCP Server - Upstream Sync Tool${NC}"
 echo -e "${BLUE}================================================${NC}"
@@ -175,34 +188,164 @@ EOF
 else
     echo -e "${RED}✗ Automatic merge failed - conflicts detected${NC}"
     echo ""
-    echo -e "${YELLOW}Conflicted files:${NC}"
-    git status --short | grep "^UU\|^AA\|^DD"
-    echo ""
-    echo -e "${BLUE}Manual conflict resolution required:${NC}"
-    echo ""
-    echo "Common conflict resolution steps:"
-    echo ""
-    echo "1. For server.py:"
-    echo "   - Keep both changes (upstream + martin_patches import)"
-    echo "   - Ensure the import is at the top, before other imports"
-    echo ""
-    echo "2. For .env.example:"
-    echo "   - Keep upstream changes"
-    echo "   - Re-add the Martin's Custom Patches section"
-    echo ""
-    echo "3. For pyproject.toml:"
-    echo "   - Keep upstream version/dependencies"
-    echo "   - Change package name back to 'martin-mcp-server'"
-    echo "   - Keep .martin_venv in exclusions"
-    echo ""
-    echo "After resolving conflicts:"
-    echo "   git add <resolved-files>"
-    echo "   git merge --continue"
-    echo ""
-    echo "Or to abort the merge:"
-    echo "   git merge --abort"
+    echo -e "${YELLOW}Attempting automatic conflict resolution...${NC}"
 
-    exit 1
+    # Get list of conflicted files
+    CONFLICTED_FILES=$(git diff --name-only --diff-filter=U)
+
+    if [ -z "$CONFLICTED_FILES" ]; then
+        echo -e "${GREEN}✓ No conflicts to resolve${NC}"
+    else
+        echo -e "${BLUE}Conflicted files:${NC}"
+        echo "$CONFLICTED_FILES"
+        echo ""
+
+        # Auto-resolve common conflicts
+        AUTO_RESOLVED=0
+        MANUAL_NEEDED=0
+
+        for file in $CONFLICTED_FILES; do
+            case "$file" in
+                pyproject.toml)
+                    echo -e "${BLUE}Resolving pyproject.toml...${NC}"
+                    # Extract upstream version
+                    UPSTREAM_VERSION=$(git show upstream/main:pyproject.toml | grep '^version = ' | head -1 | cut -d'"' -f2)
+                    if [ ! -z "$UPSTREAM_VERSION" ]; then
+                        # Use ours as base, then fix package name and version
+                        git checkout --ours pyproject.toml
+                        sed_inplace "s/^version = .*/version = \"$UPSTREAM_VERSION\"/" pyproject.toml
+                        sed_inplace 's/^name = .*/name = "martin-mcp-server"/' pyproject.toml
+                        git add pyproject.toml
+                        echo -e "${GREEN}  ✓ Resolved (martin-mcp-server v$UPSTREAM_VERSION)${NC}"
+                        AUTO_RESOLVED=$((AUTO_RESOLVED + 1))
+                    else
+                        echo -e "${YELLOW}  ⚠ Could not extract version${NC}"
+                        MANUAL_NEEDED=$((MANUAL_NEEDED + 1))
+                    fi
+                    ;;
+
+                config.py)
+                    echo -e "${BLUE}Resolving config.py...${NC}"
+                    # Extract upstream version and date
+                    UPSTREAM_VERSION=$(git show upstream/main:config.py | grep '^__version__ = ' | cut -d'"' -f2)
+                    UPSTREAM_DATE=$(git show upstream/main:config.py | grep '^__updated__ = ' | cut -d'"' -f2)
+                    if [ ! -z "$UPSTREAM_VERSION" ] && [ ! -z "$UPSTREAM_DATE" ]; then
+                        # Use ours as base, then update version and date
+                        git checkout --ours config.py
+                        sed_inplace "s/^__version__ = .*/__version__ = \"$UPSTREAM_VERSION\"/" config.py
+                        sed_inplace "s/^__updated__ = .*/__updated__ = \"$UPSTREAM_DATE\"/" config.py
+                        git add config.py
+                        echo -e "${GREEN}  ✓ Resolved (v$UPSTREAM_VERSION, $UPSTREAM_DATE)${NC}"
+                        AUTO_RESOLVED=$((AUTO_RESOLVED + 1))
+                    else
+                        echo -e "${YELLOW}  ⚠ Could not extract version/date${NC}"
+                        MANUAL_NEEDED=$((MANUAL_NEEDED + 1))
+                    fi
+                    ;;
+
+                CHANGELOG.md)
+                    echo -e "${BLUE}Resolving CHANGELOG.md...${NC}"
+                    # Use upstream version (they maintain the official changelog)
+                    git checkout --theirs CHANGELOG.md
+                    git add CHANGELOG.md
+                    echo -e "${GREEN}  ✓ Resolved (using upstream)${NC}"
+                    AUTO_RESOLVED=$((AUTO_RESOLVED + 1))
+                    ;;
+
+                README.md)
+                    echo -e "${BLUE}Resolving README.md...${NC}"
+                    # Keep fork's README, but update version badges
+                    UPSTREAM_VERSION=$(git show upstream/main:config.py | grep '^__version__ = ' | cut -d'"' -f2)
+                    if [ ! -z "$UPSTREAM_VERSION" ]; then
+                        git checkout --ours README.md
+                        # Update version badges
+                        sed_inplace "s/version-[0-9.]*-green/version-$UPSTREAM_VERSION-green/" README.md
+                        sed_inplace "s/upstream-v[0-9.]*-blue/upstream-v$UPSTREAM_VERSION-blue/" README.md
+                        git add README.md
+                        echo -e "${GREEN}  ✓ Resolved (updated badges to v$UPSTREAM_VERSION)${NC}"
+                        AUTO_RESOLVED=$((AUTO_RESOLVED + 1))
+                    else
+                        echo -e "${YELLOW}  ⚠ Could not extract version${NC}"
+                        MANUAL_NEEDED=$((MANUAL_NEEDED + 1))
+                    fi
+                    ;;
+
+                README_ZH.md)
+                    echo -e "${BLUE}Resolving README_ZH.md...${NC}"
+                    # Keep fork's Chinese README, update version badges
+                    UPSTREAM_VERSION=$(git show upstream/main:config.py | grep '^__version__ = ' | cut -d'"' -f2)
+                    if [ ! -z "$UPSTREAM_VERSION" ]; then
+                        git checkout --ours README_ZH.md
+                        sed_inplace "s/version-[0-9.]*-green/version-$UPSTREAM_VERSION-green/" README_ZH.md
+                        sed_inplace "s/upstream-v[0-9.]*-blue/upstream-v$UPSTREAM_VERSION-blue/" README_ZH.md
+                        git add README_ZH.md
+                        echo -e "${GREEN}  ✓ Resolved (updated badges to v$UPSTREAM_VERSION)${NC}"
+                        AUTO_RESOLVED=$((AUTO_RESOLVED + 1))
+                    else
+                        echo -e "${YELLOW}  ⚠ Could not extract version${NC}"
+                        MANUAL_NEEDED=$((MANUAL_NEEDED + 1))
+                    fi
+                    ;;
+
+                tests/test_uvx_support.py)
+                    echo -e "${BLUE}Resolving tests/test_uvx_support.py...${NC}"
+                    # Use upstream version, then fix package name assertions
+                    git checkout --theirs tests/test_uvx_support.py
+                    sed_inplace 's/"pal-mcp-server"/"martin-mcp-server"/g' tests/test_uvx_support.py
+                    git add tests/test_uvx_support.py
+                    echo -e "${GREEN}  ✓ Resolved (using upstream, fixed package name)${NC}"
+                    AUTO_RESOLVED=$((AUTO_RESOLVED + 1))
+                    ;;
+
+                run-server.sh|run-server.ps1)
+                    echo -e "${BLUE}Resolving $file...${NC}"
+                    # Use upstream version (they maintain these scripts)
+                    git checkout --theirs "$file"
+                    git add "$file"
+                    echo -e "${GREEN}  ✓ Resolved (using upstream)${NC}"
+                    AUTO_RESOLVED=$((AUTO_RESOLVED + 1))
+                    ;;
+
+                *)
+                    echo -e "${YELLOW}  ⚠ $file requires manual resolution${NC}"
+                    MANUAL_NEEDED=$((MANUAL_NEEDED + 1))
+                    ;;
+            esac
+        done
+
+        echo ""
+        echo -e "${BLUE}Auto-resolution summary:${NC}"
+        echo -e "  ${GREEN}✓ Resolved: $AUTO_RESOLVED${NC}"
+        if [ $MANUAL_NEEDED -gt 0 ]; then
+            echo -e "  ${YELLOW}⚠ Manual: $MANUAL_NEEDED${NC}"
+        fi
+
+        # Check if all conflicts are resolved
+        REMAINING_CONFLICTS=$(git diff --name-only --diff-filter=U)
+        if [ -z "$REMAINING_CONFLICTS" ]; then
+            echo ""
+            echo -e "${GREEN}✓ All conflicts resolved automatically!${NC}"
+            echo -e "${BLUE}Committing merge...${NC}"
+
+            # Create a detailed commit message
+            UPSTREAM_VERSION=$(git show upstream/main:config.py | grep '^__version__ = ' | cut -d'"' -f2)
+            git commit --no-edit
+
+            echo -e "${GREEN}✓ Merge committed successfully${NC}"
+        else
+            echo ""
+            echo -e "${RED}✗ Some conflicts still need manual resolution:${NC}"
+            git status --short | grep "^UU\|^AA\|^DD"
+            echo ""
+            echo "After resolving:"
+            echo "   git add <resolved-files>"
+            echo "   git merge --continue"
+            echo ""
+            echo "Or to abort:"
+            echo "   git merge --abort"
+            exit 1
+        fi
+    fi
 fi
 
 echo ""
