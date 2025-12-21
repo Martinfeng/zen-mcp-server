@@ -2,6 +2,19 @@
 
 <!-- version list -->
 
+## v1.5.0 (2025-12-21)
+
+### Chores
+
+- Sync version to config.py [skip ci]
+  ([`8479cce`](https://github.com/Martinfeng/zen-mcp-server/commit/8479cce5b9cbf640f3f91f434c00ea959ac0a504))
+
+### Features
+
+- Add automatic conflict resolution to sync script
+  ([`51261e5`](https://github.com/Martinfeng/zen-mcp-server/commit/51261e520571b4b3dce23854ca0a76616c2c54f7))
+
+
 ## v1.4.0 (2025-12-21)
 
 ### Bug Fixes
