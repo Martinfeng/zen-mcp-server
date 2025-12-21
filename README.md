@@ -3,8 +3,8 @@
 > A enhanced fork of [PAL MCP Server](https://github.com/BeehiveInnovations/pal-mcp-server) (formerly Zen MCP Server) by Beehive Innovations
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-9.4.2-green.svg)](https://github.com/Martinfeng/zen-mcp-server)
-[![Upstream](https://img.shields.io/badge/upstream-v9.4.2-blue.svg)](https://github.com/BeehiveInnovations/pal-mcp-server)
+[![Version](https://img.shields.io/badge/version-9.8.2-green.svg)](https://github.com/Martinfeng/zen-mcp-server)
+[![Upstream](https://img.shields.io/badge/upstream-v9.8.2-blue.svg)](https://github.com/BeehiveInnovations/pal-mcp-server)
 
 English | [简体中文](README_ZH.md)
 
