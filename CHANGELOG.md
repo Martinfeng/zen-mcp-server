@@ -2,6 +2,82 @@
 
 <!-- version list -->
 
+## v1.4.0 (2025-12-21)
+
+### Bug Fixes
+
+- Allow home subdirectories through is_dangerous_path()
+  ([`e5548ac`](https://github.com/Martinfeng/zen-mcp-server/commit/e5548acb984ca4f8b2ae8381f879a0285094257f))
+
+- Grok test
+  ([`39c7721`](https://github.com/Martinfeng/zen-mcp-server/commit/39c77215e5d6892269e523ff25b706dd5671c042))
+
+- Path traversal vulnerability - use prefix matching in is_dangerous_path()
+  ([`9ed15f4`](https://github.com/Martinfeng/zen-mcp-server/commit/9ed15f405a9462b4db7aa44ca2d989e092c008e4))
+
+- Use Path.is_relative_to() for cross-platform dangerous path detection
+  ([`91ffb51`](https://github.com/Martinfeng/zen-mcp-server/commit/91ffb51564e5655ec91111938039ed81e0d8e4c6))
+
+- **providers**: Omit store parameter for OpenRouter responses endpoint
+  ([`1f8b58d`](https://github.com/Martinfeng/zen-mcp-server/commit/1f8b58d607c2809b9fa78860718a69207cb66e32))
+
+- **security**: Handle macOS symlinked system dirs
+  ([`ba08308`](https://github.com/Martinfeng/zen-mcp-server/commit/ba08308a23d1c1491099c5d0eae548077bd88f9f))
+
+### Chores
+
+- Sync version to config.py [skip ci]
+  ([`7afc7c1`](https://github.com/Martinfeng/zen-mcp-server/commit/7afc7c1cc96e23992c8f105f960132c657883bb1))
+
+- Sync version to config.py [skip ci]
+  ([`c492735`](https://github.com/Martinfeng/zen-mcp-server/commit/c4927358720277efa0373b339bd8e06ee06498d0))
+
+- Sync version to config.py [skip ci]
+  ([`69a42a7`](https://github.com/Martinfeng/zen-mcp-server/commit/69a42a71d19d66f1d94d51fa27db29323e3d9a63))
+
+- Sync version to config.py [skip ci]
+  ([`cb97a89`](https://github.com/Martinfeng/zen-mcp-server/commit/cb97a891dec6ab7c56b8b35c277ab3680af384d9))
+
+- Sync version to config.py [skip ci]
+  ([`aa85644`](https://github.com/Martinfeng/zen-mcp-server/commit/aa85644c9b15893443107c3a62ec58cd7b9dc532))
+
+- Sync version to config.py [skip ci]
+  ([`94ff26c`](https://github.com/Martinfeng/zen-mcp-server/commit/94ff26c673a64087eb29f8f54c1828f1157c594a))
+
+- Sync version to config.py [skip ci]
+  ([`ba455e1`](https://github.com/Martinfeng/zen-mcp-server/commit/ba455e1c77d4333c96066cbc0186ccefb2074c03))
+
+### Features
+
+- Add Claude Opus 4.5 model via OpenRouter
+  ([`813ce5c`](https://github.com/Martinfeng/zen-mcp-server/commit/813ce5c9f7db2910eb12d8c84d3d99f464c430ed))
+
+- GPT-5.2 support
+  ([`8b16405`](https://github.com/Martinfeng/zen-mcp-server/commit/8b16405f0609e232ff808361dc2a4d8ec258b0f3))
+
+- Grok-4.1 support https://github.com/BeehiveInnovations/pal-mcp-server/issues/339
+  ([`514c9c5`](https://github.com/Martinfeng/zen-mcp-server/commit/514c9c58fcc91933348d2188ed8c82bbe98132f2))
+
+- Re-enable web search for clink codex using correct --enable flag
+  ([`e7b9f3a`](https://github.com/Martinfeng/zen-mcp-server/commit/e7b9f3a5d7e06c690c82b9fd13a93310bcf388ed))
+
+- Support native installed Claude CLI detection
+  ([`adc6231`](https://github.com/Martinfeng/zen-mcp-server/commit/adc6231b98886f0bc35cb04d04d948eba2f0f058))
+
+### Refactoring
+
+- **tests**: Address code review feedback
+  ([`0c3e63c`](https://github.com/Martinfeng/zen-mcp-server/commit/0c3e63c0c7f1556f4b6686f9c6f30e4bb4a48c7c))
+
+- **tests**: Remove unused setUp method
+  ([`b6a8d68`](https://github.com/Martinfeng/zen-mcp-server/commit/b6a8d682d920c2283724b588818bc1162a865d74))
+
+### Testing
+
+- Add comprehensive test coverage for Opus 4.5 aliases
+  ([`cf63fd2`](https://github.com/Martinfeng/zen-mcp-server/commit/cf63fd25440d599f2ec006bb8cfda5b8a6f61524))
+
+
 ## v9.8.2 (2025-12-15)
 
 ### Bug Fixes
